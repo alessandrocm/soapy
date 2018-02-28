@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="Order" targetNamespace="http://invidi.com/Order.xsd" elementFormDefault="qualified" xmlns="http://invidi.com/Order.xsd" xmlns:mstns="http://invidi.com/Order.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="Order">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element name="OrderID" type="xs:int" />
+
+                <xs:element name="SalesID" type="xs:string" />
+
+                <xs:element name="Name" type="xs:string" />
+
+                <xs:element name="DefaultAsset" type="xs:string" />
+
+                <xs:element name="Priority" type="xs:int" nillable="true" />
+
+                <xs:element name="Status" type="OrderStatus" />
+
+                <xs:element name="Type" type="Type" nillable="true" />
+
+                <xs:element name="Advertiser" type="Advertiser" />
+
+                <xs:element name="BuyingAgency" type="BuyingAgency" />
+
+                <xs:element name="AdExec" type="AdExec" />
+
+                <xs:element name="Owner" type="xs:string" />
+
+                <xs:element name="StartTime" type="xs:dateTime" />
+
+                <xs:element name="EndTime" type="xs:dateTime" />
+
+                <xs:element name="Notes" type="xs:string" />
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    <xs:complexType name="Advertiser">
+
+        <xs:sequence>
+
+            <xs:element name="Name" type="xs:string" />
+
+            <xs:element name="ID" type="xs:string" />
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="BuyingAgency">
+
+        <xs:sequence>
+
+            <xs:element name="Name" type="xs:string" />
+
+            <xs:element name="ID" type="xs:string" />
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="AdExec">
+
+        <xs:sequence>
+
+            <xs:element name="Name" type="xs:string" />
+
+            <xs:element name="ID" type="xs:string" />
+
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:simpleType name="OrderStatus">
+
+        <xs:restriction base="xs:string">
+
+            <xs:enumeration value="Unapproved" />
+
+            <xs:enumeration value="Active" />
+
+            <xs:enumeration value="Suspended" />
+
+            <xs:enumeration value="Canceled" />
+
+            <xs:enumeration value="Completed" />
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+    <xs:simpleType name="Type">
+
+        <xs:restriction base="xs:string">
+
+            <xs:enumeration value="Aggregation" />
+
+            <xs:enumeration value="MASO" />
+
+            <xs:enumeration value="SASO" />
+
+            <xs:enumeration value="ZTA" />
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+</xs:schema>

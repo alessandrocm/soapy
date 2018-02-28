@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="OrderLine" targetNamespace="http://invidi.com/OrderLine.xsd" elementFormDefault="qualified" xmlns="http://invidi.com/OrderLine.xsd" xmlns:mstns="http://invidi.com/OrderLine.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+       <xs:element name="OrderLine">
+
+             <xs:complexType>
+
+                    <xs:sequence>
+
+                           <xs:element name="OrderLineID" type="xs:int" />
+
+                           <xs:element name="SalesID" type="xs:string" />
+
+                           <xs:element name="OrderID" type="xs:int" />
+
+                           <xs:element name="Name" type="xs:string" />
+
+                           <xs:element name="Priority" type="xs:int" nillable="true" />
+
+                           <xs:element name="Status" type="OrderLineStatus" />
+
+                           <xs:element name="AdID" type="xs:string" />
+
+                           <xs:element name="AdLength" type="xs:int" nillable="true" />
+
+                           <xs:element name="AssetVariants" type="AssetVariants" />
+
+                           <xs:element name="CPM" type="xs:double" nillable="true" />
+
+                           <xs:element name="MaximumViewings" type="MaximumViewings" />
+
+                           <xs:element name="Separation" type="xs:double" nillable="true" />
+
+                           <xs:element name="SkipWeeksOn" type="xs:int" nillable="true" />
+
+                           <xs:element name="SkipWeeksOff" type="xs:int" nillable="true" />
+
+                           <xs:element name="DesiredImpressions" type="xs:int" nillable="true" />
+
+                           <xs:element name="DaysOfWeek" type="DaysOfWeek" />
+
+                           <xs:element name="ActivationTime" type="xs:dateTime" nillable="true" />
+
+                           <xs:element name="DeactivationTime" type="xs:dateTime" nillable="true" />
+
+                           <xs:element name="DayParts" type="DayParts" />
+
+                           <xs:element name="Programs" type="Programs" />
+
+                           <xs:element name="Networks" type="Networks" />
+
+                           <xs:element name="Ratings" type="Ratings" />
+
+                           <xs:element name="Targeting" type="Targeting" />
+
+                           <xs:element name="Regions" type="Regions" />
+
+                           <xs:element name="RegionCode" type="xs:string" />
+
+                           <xs:element name="Brand" type="Brand" />
+
+                           <xs:element name="Product" type="Product" />
+
+                    </xs:sequence>
+
+             </xs:complexType>
+
+       </xs:element>
+
+       <xs:simpleType name="OrderLineStatus">
+
+             <xs:restriction base="xs:string">
+
+                    <xs:enumeration value="Unapproved" />
+
+                    <xs:enumeration value="Active" />
+
+                    <xs:enumeration value="Suspended" />
+
+                    <xs:enumeration value="Canceled" />
+
+                    <xs:enumeration value="Completed" />
+
+             </xs:restriction>
+
+       </xs:simpleType>
+
+       <xs:complexType name="AssetVariants">
+
+             <xs:sequence>
+
+                    <xs:element name="AssetVariant" type="AssetVariant" maxOccurs="unbounded"/>
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="AssetVariant">
+
+             <xs:sequence>
+
+                    <xs:element name="AdID" type="xs:string" />
+
+                    <xs:element name="Profile" type="xs:string" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="MaximumViewings">
+
+             <xs:sequence>
+
+                    <xs:element name="Count" type="xs:int" />
+
+                    <xs:element name="Period" type="Period" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:simpleType name="Period">
+
+             <xs:restriction base="xs:string">
+
+                    <xs:enumeration value="Daily" />
+
+                    <xs:enumeration value="Weekly" />
+
+                    <xs:enumeration value="PerFlight" />
+
+             </xs:restriction>
+
+       </xs:simpleType>
+
+       <xs:complexType name="DaysOfWeek">
+
+             <xs:sequence>
+
+                    <xs:element name="EnforceAt" type="EnforceAt" />
+
+                    <xs:element name="Monday" type="xs:boolean" />
+
+                    <xs:element name="Tuesday" type="xs:boolean" />
+
+                    <xs:element name="Wednesday" type="xs:boolean" />
+
+                    <xs:element name="Thursday" type="xs:boolean" />
+
+                    <xs:element name="Friday" type="xs:boolean" />
+
+                    <xs:element name="Saturday" type="xs:boolean" />
+
+                    <xs:element name="Sunday" type="xs:boolean" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:simpleType name="EnforceAt">
+
+             <xs:restriction base="xs:string">
+
+                    <xs:enumeration value="Airtime" />
+
+                    <xs:enumeration value="Playtime" />
+
+             </xs:restriction>
+
+       </xs:simpleType>
+
+       <xs:complexType name="DayParts">
+
+             <xs:sequence>
+
+                    <xs:element name="DayPart" type="DayPart" maxOccurs="unbounded"/>
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="DayPart">
+
+             <xs:sequence>
+
+                    <xs:element name="EnforceAt" type="EnforceAt" />
+
+                    <xs:element name="StartTime" type="xs:int" />
+
+                    <xs:element name="EndTime" type="xs:int" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Programs">
+
+             <xs:sequence>
+
+                    <xs:element name="Inclusions" type="TargetedPrograms" />
+
+                    <xs:element name="Exclusions" type="TargetedPrograms" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="TargetedPrograms">
+
+             <xs:sequence>
+
+                    <xs:element name="Name" type="xs:string" maxOccurs="unbounded"/>
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Networks">
+
+             <xs:sequence>
+
+                    <xs:element name="Inclusions" type="TargetedNetworks" />
+
+                    <xs:element name="Exclusions" type="TargetedNetworks" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="TargetedNetworks">
+
+             <xs:sequence>
+
+                    <xs:element name="Network" type="Network" maxOccurs="unbounded"/>
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Network">
+
+             <xs:sequence>
+
+                    <xs:element name="Name" type="xs:string" />
+
+                    <xs:element name="ID" type="xs:string" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Ratings">
+
+             <xs:sequence>
+
+                    <xs:element name="Inclusions" type="TargetedRatings" />
+
+                    <xs:element name="Exclusions" type="TargetedRatings" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="TargetedRatings">
+
+             <xs:sequence>
+
+                    <xs:element name="N-A" type="xs:boolean" />
+
+                    <xs:element name="TV-Y" type="xs:boolean" />
+
+                    <xs:element name="TV-Y7" type="xs:boolean" />
+
+                    <xs:element name="TV-G" type="xs:boolean" />
+
+                    <xs:element name="TV-PG" type="xs:boolean" />
+
+                    <xs:element name="TV-14" type="xs:boolean" />
+
+                    <xs:element name="TV-MA" type="xs:boolean" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Targeting">
+
+             <xs:sequence>
+
+                    <xs:element name="Name" type="xs:string" />
+
+                    <xs:element name="Type" type="xs:string" />
+
+                    <xs:element name="Term" type="Term" maxOccurs="unbounded" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Term">
+
+             <xs:sequence>
+
+                    <xs:element name="Include" type="TargetingTerm" maxOccurs="unbounded"/>
+
+                    <xs:element name="Exclude" type="TargetingTerm" maxOccurs="unbounded"/>
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="TargetingTerm">
+
+             <xs:sequence>
+
+                    <xs:element name="Code" type="xs:string" />
+
+                    <xs:element name="Option" type="xs:string" maxOccurs="unbounded"/>
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Brand">
+
+             <xs:sequence>
+
+                    <xs:element name="Protection" type="xs:boolean" />
+
+                    <xs:element name="Name" type="xs:string" />
+
+                    <xs:element name="BrandID" type="xs:string" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Product">
+
+             <xs:sequence>
+
+                    <xs:element name="Protection" type="xs:boolean" />
+
+                    <xs:element name="Name" type="xs:string" />
+
+                    <xs:element name="ProductID" type="xs:string" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Regions">
+
+             <xs:sequence>
+
+                    <xs:element name="Region" type="Region" maxOccurs="unbounded" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:complexType name="Region">
+
+             <xs:sequence>
+
+                    <xs:element name="Name" type="xs:string" />
+
+                    <xs:element name="Owner" type="xs:string" />
+
+                    <xs:element name="Category" type="xs:string" maxOccurs="unbounded" />
+
+             </xs:sequence>
+
+       </xs:complexType>
+
+       <xs:element name="Region" type="Region" />
+
+</xs:schema>

@@ -1,0 +1,16 @@
+{
+  "name": "soapy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Alessandro Catter-Martinez <alessandro.cattermartinez@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server/index.js",
+    "proxy": "nodemon proxy/index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "soap": "^0.23.0"
+  }
+}

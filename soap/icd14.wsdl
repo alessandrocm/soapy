@@ -1,0 +1,1649 @@
+<wsdl:definitions name="MediaHub" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s3="http://invidi.com/Notification.xsd" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://invidi.com/Ede.xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://invidi.com/Order.xsd" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://invidi.com/OrderLine.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://invidi.com/Ede.xsd">
+
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    The External Data Exchange Web Service is used to exchange data between Advatar and Third Parties
+
+  </wsdl:documentation>
+
+  <wsdl:types>
+
+    <s:schema elementFormDefault="qualified" targetNamespace="http://invidi.com/Ede.xsd">
+
+      <s:import namespace="http://invidi.com/Order.xsd"/>
+
+      <s:import namespace="http://invidi.com/OrderLine.xsd"/>
+
+      <s:import namespace="http://invidi.com/Notification.xsd"/>
+
+      <s:element name="CreateOrder">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Order"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="CreateOrderResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrder">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrderResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Order"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrders">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="UpdatedSince" nillable="true" type="s:dateTime"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="StatusFilter" nillable="true" type="s1:OrderStatus"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrdersResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="unbounded" name="OrderID" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="UpdateOrder">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Order"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="UpdateOrderResponse">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="DeleteOrder">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Order"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="DeleteOrderResponse">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="CreateOrderLine">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="CreateOrderLineResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderLineID" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrderLine">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderLineID" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrderLineResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrderLines">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Order"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderLineStatus" nillable="true" type="s2:OrderLineStatus"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetOrderLinesResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="unbounded" name="OrderLineID" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="UpdateOrderLine">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="UpdateOrderLineResponse">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="DeleteOrderLine">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="DeleteOrderLineResponse">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="CalculateReach">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="CalculateReachResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="ReachEstimate" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="ForecastImpressions">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="ForecastImpressionsResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="ImpressionsEstimate" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetImpressions">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:OrderLine"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetImpressionsResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="TotalImpressions" type="s:int"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="RequiredContentNotification">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s3:Notification"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="RequiredContentNotificationResponse">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="GetCategories">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="GetCategoriesResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s2:Category"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetRegions">
+
+        <s:complexType/>
+
+      </s:element>
+
+      <s:element name="GetRegionsResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s2:Region"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetZipCodes">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:Region"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:element name="GetZipCodesResponse">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s2:ZipCode"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+    </s:schema>
+
+    <s:schema elementFormDefault="qualified" targetNamespace="http://invidi.com/Order.xsd">
+
+      <s:element name="Order">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="SalesID" type="s:string"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="DefaultAsset" type="s:string"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="Priority" nillable="true" type="s:int"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s1:OrderStatus"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="Type" nillable="true" type="s1:Type"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Advertiser" type="s1:Advertiser"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="BuyingAgency" type="s1:BuyingAgency"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="AdExec" type="s1:AdExec"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Owner" type="s:string"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:simpleType name="OrderStatus">
+
+        <s:restriction base="s:string">
+
+          <s:enumeration value="Unapproved"/>
+
+          <s:enumeration value="Active"/>
+
+          <s:enumeration value="Suspended"/>
+
+          <s:enumeration value="Canceled"/>
+
+          <s:enumeration value="Completed"/>
+
+        </s:restriction>
+
+      </s:simpleType>
+
+      <s:simpleType name="Type">
+
+        <s:restriction base="s:string">
+
+          <s:enumeration value="Aggregation"/>
+
+          <s:enumeration value="MASO"/>
+
+          <s:enumeration value="SASO"/>
+
+          <s:enumeration value="ZTA"/>
+
+        </s:restriction>
+
+      </s:simpleType>
+
+      <s:complexType name="Advertiser">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="BuyingAgency">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="AdExec">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+    </s:schema>
+
+    <s:schema elementFormDefault="qualified" targetNamespace="http://invidi.com/OrderLine.xsd">
+
+      <s:element name="OrderLine">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderLineID" type="s:int"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="SalesID" type="s:string"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="OrderID" type="s:int"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="Priority" nillable="true" type="s:int"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s2:OrderLineStatus"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="AdID" type="s:string"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="AdLength" nillable="true" type="s:int"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="AssetVariants" type="s2:ArrayOfAssetVariant"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="CPM" nillable="true" type="s:double"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="MaximumViewings" type="s2:MaximumViewings"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="Separation" nillable="true" type="s:double"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="SkipWeeksOn" nillable="true" type="s:int"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="SkipWeeksOff" nillable="true" type="s:int"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="DesiredImpressions" nillable="true" type="s:int"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="DaysOfWeek" type="s2:DaysOfWeek"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="ActivationTime" nillable="true" type="s:dateTime"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="DeactivationTime" nillable="true" type="s:dateTime"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="DayParts" type="s2:ArrayOfDayPart"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Programs" type="s2:Programs"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Networks" type="s2:Networks"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Ratings" type="s2:Ratings"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Targeting" type="s2:Targeting"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Regions" type="s2:ArrayOfRegion"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="RegionCode" type="s:string"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Brand" type="s2:Brand"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="Product" type="s2:Product"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:simpleType name="OrderLineStatus">
+
+        <s:restriction base="s:string">
+
+          <s:enumeration value="Unapproved"/>
+
+          <s:enumeration value="Active"/>
+
+          <s:enumeration value="Suspended"/>
+
+          <s:enumeration value="Canceled"/>
+
+          <s:enumeration value="Completed"/>
+
+        </s:restriction>
+
+      </s:simpleType>
+
+      <s:complexType name="ArrayOfAssetVariant">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AssetVariant" type="s2:AssetVariant"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="AssetVariant">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="AdID" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Profile" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="MaximumViewings">
+
+        <s:sequence>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Count" type="s:int"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Period" type="s2:Period"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:simpleType name="Period">
+
+        <s:restriction base="s:string">
+
+          <s:enumeration value="Daily"/>
+
+          <s:enumeration value="Weekly"/>
+
+          <s:enumeration value="PerFlight"/>
+
+        </s:restriction>
+
+      </s:simpleType>
+
+      <s:complexType name="DaysOfWeek">
+
+        <s:sequence>
+
+          <s:element minOccurs="1" maxOccurs="1" name="EnforceAt" type="s2:EnforceAt"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Monday" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Tuesday" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Wednesday" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Thursday" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Friday" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Saturday" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Sunday" type="s:boolean"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:simpleType name="EnforceAt">
+
+        <s:restriction base="s:string">
+
+          <s:enumeration value="Airtime"/>
+
+          <s:enumeration value="Playtime"/>
+
+        </s:restriction>
+
+      </s:simpleType>
+
+      <s:complexType name="ArrayOfDayPart">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DayPart" type="s2:DayPart"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="DayPart">
+
+        <s:sequence>
+
+          <s:element minOccurs="1" maxOccurs="1" name="EnforceAt" type="s2:EnforceAt"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:int"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:int"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Programs">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Inclusions" type="s2:ArrayOfString"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Exclusions" type="s2:ArrayOfString"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="ArrayOfString">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Name" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Networks">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Inclusions" type="s2:ArrayOfNetwork"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Exclusions" type="s2:ArrayOfNetwork"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="ArrayOfNetwork">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Network" type="s2:Network"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Network">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Ratings">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Inclusions" type="s2:TargetedRatings"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Exclusions" type="s2:TargetedRatings"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="TargetedRatings">
+
+        <s:sequence>
+
+          <s:element minOccurs="1" maxOccurs="1" name="N-A" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="TV-Y" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="TV-Y7" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="TV-G" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="TV-PG" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="TV-14" type="s:boolean"/>
+
+          <s:element minOccurs="1" maxOccurs="1" name="TV-MA" type="s:boolean"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Targeting">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Term" type="s2:Term"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Term">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Include" type="s2:TargetingTerm"/>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Exclude" type="s2:TargetingTerm"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="TargetingTerm">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Option" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="ArrayOfRegion">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Region" type="s2:Region"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Region">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Owner" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Category" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Brand">
+
+        <s:sequence>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Protection" type="s:boolean"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="BrandID" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:complexType name="Product">
+
+        <s:sequence>
+
+          <s:element minOccurs="1" maxOccurs="1" name="Protection" type="s:boolean"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string"/>
+
+          <s:element minOccurs="0" maxOccurs="1" name="ProductID" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+      <s:element name="Category" type="s:string"/>
+
+      <s:element name="Region" type="s2:Region"/>
+
+      <s:element name="ZipCode" type="s:string"/>
+
+    </s:schema>
+
+    <s:schema elementFormDefault="qualified" targetNamespace="http://invidi.com/Notification.xsd">
+
+      <s:element name="Notification">
+
+        <s:complexType>
+
+          <s:sequence>
+
+            <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime"/>
+
+            <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="RegionCode" type="s:string"/>
+
+            <s:element minOccurs="0" maxOccurs="1" name="AssetList" type="s3:ArrayOfString"/>
+
+          </s:sequence>
+
+        </s:complexType>
+
+      </s:element>
+
+      <s:complexType name="ArrayOfString">
+
+        <s:sequence>
+
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Asset" type="s:string"/>
+
+        </s:sequence>
+
+      </s:complexType>
+
+    </s:schema>
+
+  </wsdl:types>
+
+  <wsdl:message name="CreateOrderSoap12In">
+
+    <wsdl:part name="parameters" element="tns:CreateOrder"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="CreateOrderSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:CreateOrderResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrderSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetOrder"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrderSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetOrderResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrdersSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetOrders"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrdersSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetOrdersResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="UpdateOrderSoap12In">
+
+    <wsdl:part name="parameters" element="tns:UpdateOrder"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="UpdateOrderSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:UpdateOrderResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="DeleteOrderSoap12In">
+
+    <wsdl:part name="parameters" element="tns:DeleteOrder"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="DeleteOrderSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:DeleteOrderResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="CreateOrderLineSoap12In">
+
+    <wsdl:part name="parameters" element="tns:CreateOrderLine"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="CreateOrderLineSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:CreateOrderLineResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrderLineSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetOrderLine"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrderLineSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetOrderLineResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrderLinesSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetOrderLines"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetOrderLinesSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetOrderLinesResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="UpdateOrderLineSoap12In">
+
+    <wsdl:part name="parameters" element="tns:UpdateOrderLine"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="UpdateOrderLineSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:UpdateOrderLineResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="DeleteOrderLineSoap12In">
+
+    <wsdl:part name="parameters" element="tns:DeleteOrderLine"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="DeleteOrderLineSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:DeleteOrderLineResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="CalculateReachSoap12In">
+
+    <wsdl:part name="parameters" element="tns:CalculateReach"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="CalculateReachSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:CalculateReachResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="ForecastImpressionsSoap12In">
+
+    <wsdl:part name="parameters" element="tns:ForecastImpressions"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="ForecastImpressionsSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:ForecastImpressionsResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetImpressionsSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetImpressions"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetImpressionsSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetImpressionsResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="RequiredContentNotificationSoap12In">
+
+    <wsdl:part name="parameters" element="tns:RequiredContentNotification"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="RequiredContentNotificationSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:RequiredContentNotificationResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetCategoriesSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetCategories"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetCategoriesSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetCategoriesResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetRegionsSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetRegions"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetRegionsSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetRegionsResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetZipCodesSoap12In">
+
+    <wsdl:part name="parameters" element="tns:GetZipCodes"/>
+
+  </wsdl:message>
+
+  <wsdl:message name="GetZipCodesSoap12Out">
+
+    <wsdl:part name="parameters" element="tns:GetZipCodesResponse"/>
+
+  </wsdl:message>
+
+  <wsdl:portType name="EdeSoap12">
+
+    <wsdl:operation name="CreateOrder">
+
+      <wsdl:input message="tns:CreateOrderSoap12In"/>
+
+      <wsdl:output message="tns:CreateOrderSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrder">
+
+      <wsdl:input message="tns:GetOrderSoap12In"/>
+
+      <wsdl:output message="tns:GetOrderSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrders">
+
+      <wsdl:input message="tns:GetOrdersSoap12In"/>
+
+      <wsdl:output message="tns:GetOrdersSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="UpdateOrder">
+
+      <wsdl:input message="tns:UpdateOrderSoap12In"/>
+
+      <wsdl:output message="tns:UpdateOrderSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="DeleteOrder">
+
+      <wsdl:input message="tns:DeleteOrderSoap12In"/>
+
+      <wsdl:output message="tns:DeleteOrderSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="CreateOrderLine">
+
+      <wsdl:input message="tns:CreateOrderLineSoap12In"/>
+
+      <wsdl:output message="tns:CreateOrderLineSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrderLine">
+
+      <wsdl:input message="tns:GetOrderLineSoap12In"/>
+
+      <wsdl:output message="tns:GetOrderLineSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrderLines">
+
+      <wsdl:input message="tns:GetOrderLinesSoap12In"/>
+
+      <wsdl:output message="tns:GetOrderLinesSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="UpdateOrderLine">
+
+      <wsdl:input message="tns:UpdateOrderLineSoap12In"/>
+
+      <wsdl:output message="tns:UpdateOrderLineSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="DeleteOrderLine">
+
+      <wsdl:input message="tns:DeleteOrderLineSoap12In"/>
+
+      <wsdl:output message="tns:DeleteOrderLineSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="CalculateReach">
+
+      <wsdl:input message="tns:CalculateReachSoap12In"/>
+
+      <wsdl:output message="tns:CalculateReachSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="ForecastImpressions">
+
+      <wsdl:input message="tns:ForecastImpressionsSoap12In"/>
+
+      <wsdl:output message="tns:ForecastImpressionsSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetImpressions">
+
+      <wsdl:input message="tns:GetImpressionsSoap12In"/>
+
+      <wsdl:output message="tns:GetImpressionsSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="RequiredContentNotification">
+
+      <wsdl:input message="tns:RequiredContentNotificationSoap12In"/>
+
+      <wsdl:output message="tns:RequiredContentNotificationSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetCategories">
+
+      <wsdl:input message="tns:GetCategoriesSoap12In"/>
+
+      <wsdl:output message="tns:GetCategoriesSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetRegions">
+
+      <wsdl:input message="tns:GetRegionsSoap12In"/>
+
+      <wsdl:output message="tns:GetRegionsSoap12Out"/>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetZipCodes">
+
+      <wsdl:input message="tns:GetZipCodesSoap12In"/>
+
+      <wsdl:output message="tns:GetZipCodesSoap12Out"/>
+
+    </wsdl:operation>
+
+  </wsdl:portType>
+
+  <wsdl:binding name="EdeSoap12" type="tns:EdeSoap12">
+
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <wsdl:operation name="CreateOrder">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/CreateOrder" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrder">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetOrder" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrders">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetOrders" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="UpdateOrder">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/UpdateOrder" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="DeleteOrder">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/DeleteOrder" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="CreateOrderLine">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/CreateOrderLine" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrderLine">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetOrderLine" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetOrderLines">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetOrderLines" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="UpdateOrderLine">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/UpdateOrderLine" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="DeleteOrderLine">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/DeleteOrderLine" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="CalculateReach">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/CalculateReach" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="ForecastImpressions">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/ForecastImpressions" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetImpressions">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetImpressions" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="RequiredContentNotification">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/RequiredContentNotification" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetCategories">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetCategories" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetRegions">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetRegions" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+    <wsdl:operation name="GetZipCodes">
+
+      <soap12:operation soapAction="http://invidi.com/Ede.xsd/GetZipCodes" style="document"/>
+
+      <wsdl:input>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:input>
+
+      <wsdl:output>
+
+        <soap12:body use="literal"/>
+
+      </wsdl:output>
+
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="Ede">
+
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+      The External Data Exchange Web Service is used to exchange data between Advatar and Third Parties
+
+    </wsdl:documentation>
+
+    <wsdl:port name="EdeSoap12" binding="tns:EdeSoap12">
+
+      <soap12:address location="http://localhost:4724/Ede/Ede.asmx"/>
+
+    </wsdl:port>
+
+  </wsdl:service>
+
+</wsdl:definitions>
